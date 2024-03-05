@@ -22,15 +22,9 @@ spec:
         image: 673896343304.dkr.ecr.us-east-1.amazonaws.com/assignment2:v1.0
         
         env:
-        - name: MYSQL_HOST
-          value: 0.0.0.0
         - name: MYSQL_ROOT_PASSWORD
-          value: mamadpassword
-        - name: MYSQL_PORT
-          value: "3306"
-        - name: MYSQL_DATABASE
-          value: employees
-        
+          value: pw
+          
         resources:
           requests:
             cpu: 100m
