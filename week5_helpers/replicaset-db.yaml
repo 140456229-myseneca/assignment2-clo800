@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: ReplicaSet
 metadata:
   name: my-db
   labels:
@@ -8,7 +8,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mysql
+      app: mysql 
   template:
     metadata:
       labels:
@@ -22,5 +22,3 @@ spec:
           value: pw
         ports:
         - containerPort: 3306
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always

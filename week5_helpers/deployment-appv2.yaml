@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-webapp
+  name: my-webappv2
   labels:
     app: employees
-    version: v1
+    version: v2
 spec:
   replicas: 3
   selector:
     matchLabels:
       app: employees
-      version: v1
+      version: v2
   template:
     metadata:
       labels:
         app: employees
-        version: v1
+        version: v2
     spec:
       containers:
-      - name: my-webapp
-        image: 673896343304.dkr.ecr.us-east-1.amazonaws.com/assignment2:v1
+      - name: my-webappv2
+        image: 673896343304.dkr.ecr.us-east-1.amazonaws.com/assignment2:v2
         env:
         - name: DBHOST
           value: 10.244.0.10
