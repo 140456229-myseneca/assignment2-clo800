@@ -19,12 +19,15 @@ spec:
     spec:
       containers:
       - name: my-webapp
-        image: 673896343304.dkr.ecr.us-east-1.amazonaws.com/assignment2:v1
+        image: 673896343304.dkr.ecr.us-east-1.amazonaws.com/assignment-mamad:app-v1
         env:
         - name: DBHOST
-          value: 10.244.0.10
+          value: my-db.sqldb.svc.cluster.local
         - name: DBPWD
-          value: pw
+          valueFrom:
+            secretKeyRef:
+              name: secret-db
+              key: pass
         - name: DBPORT
           value: "3306"
         - name: DBUSER

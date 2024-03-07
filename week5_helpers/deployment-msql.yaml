@@ -16,10 +16,13 @@ spec:
     spec:
       containers:
       - name: my-db
-        image: 673896343304.dkr.ecr.us-east-1.amazonaws.com/assignment2:v1.0
+        image: 673896343304.dkr.ecr.us-east-1.amazonaws.com/assignment-mamad:db
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: pw
+          valueFrom:
+            secretKeyRef:
+              name: secret-db
+              key: pass
         ports:
         - containerPort: 3306
       dnsPolicy: ClusterFirst
