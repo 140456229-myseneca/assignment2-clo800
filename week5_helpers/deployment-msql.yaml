@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-db
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: my-db
+        image: 673896343304.dkr.ecr.us-east-1.amazonaws.com/assignment-mamad:db
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secret-db
+              key: pass
+        ports:
+        - containerPort: 3306
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always

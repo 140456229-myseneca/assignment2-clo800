@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-webapp
+  labels:
+    app: employees
+    version: v1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: employees
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: employees
+        version: v1
+    spec:
+      containers:
+      - name: my-webapp
+        image: 673896343304.dkr.ecr.us-east-1.amazonaws.com/assignment-mamad:app-v1
+        env:
+        - name: DBHOST
+          value: my-db.sqldb.svc.cluster.local
+        - name: DBPWD
+          valueFrom:
+            secretKeyRef:
+              name: secret-db
+              key: pass
+        - name: DBPORT
+          value: "3306"
+        - name: DBUSER
+          value: root
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 8080
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
